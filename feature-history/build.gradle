@@ -1,0 +1,63 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-parcelize'
+apply plugin: 'kotlin-kapt'
+
+android {
+    namespace 'com.ligo.feature.history'
+
+    defaultConfig {
+        compileSdk rootProject.ext.compileSdkVersion
+        minSdkVersion rootProject.ext.minSdkVersion
+
+        buildToolsVersion = rootProject.ext.buildToolsVersion
+    }
+
+    compileOptions {
+        sourceCompatibility rootProject.ext.javaVersion
+        targetCompatibility rootProject.ext.javaVersion
+    }
+
+    kotlinOptions {
+        jvmTarget = rootProject.ext.jvmTargetVersion
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    flavorDimensions += "environment"
+    productFlavors {
+        prod {
+            dimension = "environment"
+            buildConfigField 'boolean', 'SANDBOX', 'false'
+        }
+        sandbox {
+            dimension = "environment"
+            buildConfigField 'boolean', 'SANDBOX', 'true'
+        }
+    }
+}
+
+dependencies {
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation "com.google.android.material:material:$materialLibVersion"
+
+    implementation "com.google.android.gms:play-services-maps:$mapsVersion"
+
+    implementation "io.insert-koin:koin-android:$koinVersion"
+
+    implementation "io.reactivex.rxjava3:rxjava:$rxJavaVersion"
+
+    implementation project(":core")
+    implementation project(":data")
+    implementation project(":common")
+    implementation project(":common-map")
+    implementation project(":common-ligo")
+    implementation project(":common-model")
+    implementation project(':google-api')
+    implementation project(":tools-api")
+    implementation project(":navigator-api")
+
+    implementation project(":subfeature-parcel-type")
+}

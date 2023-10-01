@@ -1,0 +1,50 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-parcelize'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+
+    namespace 'com.ligo.core'
+
+    defaultConfig {
+        compileSdk rootProject.ext.compileSdkVersion
+        minSdkVersion rootProject.ext.minSdkVersion
+
+        buildToolsVersion = rootProject.ext.buildToolsVersion
+
+        buildConfigField("String", "APP_URL", "\"${rootProject.ext.appUrl}\"")
+        buildConfigField("String", "VERSION_NAME", "\"$rootProject.ext.versionName\"")
+        buildConfigField("int", "VERSION_CODE", "$rootProject.ext.versionCode")
+    }
+
+    compileOptions {
+        sourceCompatibility rootProject.ext.javaVersion
+        targetCompatibility rootProject.ext.javaVersion
+    }
+
+    kotlinOptions {
+        jvmTarget = rootProject.ext.jvmTargetVersion
+    }
+
+    flavorDimensions += "environment"
+    productFlavors {
+        prod {
+            dimension = "environment"
+            buildConfigField 'boolean', 'SANDBOX', 'false'
+        }
+        sandbox {
+            dimension = "environment"
+            buildConfigField 'boolean', 'SANDBOX', 'true'
+        }
+    }
+}
+
+dependencies {
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+
+    implementation "com.github.bumptech.glide:glide:$glideLibVersion"
+    kapt "com.github.bumptech.glide:compiler:$glideLibVersion"
+
+    implementation "io.reactivex.rxjava3:rxjava:$rxJavaVersion"
+}

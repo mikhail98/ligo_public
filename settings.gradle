@@ -1,0 +1,56 @@
+include ':app'
+
+include ':common'
+include ':common-map'
+include ':common-model'
+include ':common-ligo'
+
+include ':core'
+
+include ':data'
+
+include ':google'
+include ':google-api'
+
+include ':navigator'
+include ':navigator-api'
+
+include ':home-navigator'
+include ':home-navigator-api'
+
+include ':toggler'
+include ':toggler-api'
+
+include ':tools'
+include ':tools-api'
+
+include ':feature-about-app'
+include ':feature-onboarding'
+include ':feature-auth'
+include ':feature-parcel-qr'
+include ':feature-home'
+include ':feature-delivery'
+include ':feature-history'
+include ':feature-profile'
+include ':feature-camera'
+include ':feature-driver-trip'
+include ':feature-parcel-in-trip'
+include ':feature-reject-parcel'
+include ':feature-search-for-driver'
+include ':feature-search-place'
+include ':feature-search-place-on-map'
+include ':feature-select-role'
+include ':feature-sender-parcel'
+include ':feature-setup-phone'
+include ':feature-splash'
+include ':feature-main'
+include ':feature-chat'
+include ':feature-chats'
+
+include ':subfeature-rate-sender'
+include ':subfeature-parcel-type'
+include ':subfeature-create-trip'
+include ':subfeature-create-parcel'
+include ':subfeature-parcel-available'
+include ':chats-coordinator'
+include ':subfeature-select-photo-source'

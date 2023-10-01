@@ -1,0 +1,46 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-parcelize'
+
+android {
+    namespace 'com.ligo.home.navigator'
+
+    defaultConfig {
+        compileSdk rootProject.ext.compileSdkVersion
+        minSdkVersion rootProject.ext.minSdkVersion
+
+        buildToolsVersion = rootProject.ext.buildToolsVersion
+    }
+
+    compileOptions {
+        sourceCompatibility rootProject.ext.javaVersion
+        targetCompatibility rootProject.ext.javaVersion
+    }
+
+    kotlinOptions {
+        jvmTarget = rootProject.ext.jvmTargetVersion
+    }
+
+    flavorDimensions += "environment"
+    productFlavors {
+        prod {
+            dimension = "environment"
+            buildConfigField 'boolean', 'SANDBOX', 'false'
+        }
+        sandbox {
+            dimension = "environment"
+            buildConfigField 'boolean', 'SANDBOX', 'true'
+        }
+    }
+}
+
+dependencies {
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation "androidx.fragment:fragment-ktx:$appCompatVersion"
+
+    implementation project(":feature-delivery")
+    implementation project(":feature-history")
+    implementation project(":feature-profile")
+
+    implementation project(":home-navigator-api")
+}
