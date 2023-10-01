@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/actionDelivery"
+        android:icon="@drawable/ic_parcel"
+        android:title="" />
+
+    <item
+        android:id="@+id/actionHistory"
+        android:icon="@drawable/ic_clock"
+        android:title="" />
+
+    <item
+        android:id="@+id/actionProfile"
+        android:icon="@drawable/ic_profile"
+        android:title="" />
+</menu>

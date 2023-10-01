@@ -1,0 +1,62 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-parcelize'
+apply plugin: 'kotlin-kapt'
+
+android {
+
+    namespace 'com.ligo.data'
+
+    defaultConfig {
+        compileSdk rootProject.ext.compileSdkVersion
+        minSdkVersion rootProject.ext.minSdkVersion
+
+        buildToolsVersion = rootProject.ext.buildToolsVersion
+    }
+
+    compileOptions {
+        sourceCompatibility rootProject.ext.javaVersion
+        targetCompatibility rootProject.ext.javaVersion
+    }
+
+    kotlinOptions {
+        jvmTarget = rootProject.ext.jvmTargetVersion
+    }
+
+    flavorDimensions += "environment"
+    productFlavors {
+        prod {
+            dimension = "environment"
+            buildConfigField 'boolean', 'SANDBOX', 'false'
+        }
+        sandbox {
+            dimension = "environment"
+            buildConfigField 'boolean', 'SANDBOX', 'true'
+        }
+    }
+}
+
+dependencies {
+    implementation "io.insert-koin:koin-android:$koinVersion"
+
+    implementation "androidx.security:security-crypto:$encryptedSharedPreferncesVersion"
+
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpLibVersion"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:$okHttpLibVersion"
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofitLibVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitLibVersion"
+
+    implementation "io.reactivex.rxjava3:rxjava:$rxJavaVersion"
+    implementation "com.github.akarnokd:rxjava3-retrofit-adapter:$rxRetrofitVersion"
+
+    implementation "io.socket:socket.io-client:$socketLibVersion"
+
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation("androidx.room:room-rxjava3:$roomVersion")
+
+    kapt("androidx.room:room-compiler:$roomVersion")
+    annotationProcessor "androidx.room:room-compiler:$roomVersion"
+
+    implementation project(":core")
+}

@@ -1,0 +1,46 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+
+    namespace 'com.ligo.toggler'
+
+    defaultConfig {
+        compileSdk rootProject.ext.compileSdkVersion
+        minSdkVersion rootProject.ext.minSdkVersion
+
+        buildToolsVersion = rootProject.ext.buildToolsVersion
+    }
+
+    compileOptions {
+        sourceCompatibility rootProject.ext.javaVersion
+        targetCompatibility rootProject.ext.javaVersion
+    }
+
+    kotlinOptions {
+        jvmTarget = rootProject.ext.jvmTargetVersion
+    }
+
+    flavorDimensions += "environment"
+    productFlavors {
+        prod {
+            dimension = "environment"
+            buildConfigField 'boolean', 'SANDBOX', 'false'
+        }
+        sandbox {
+            dimension = "environment"
+            buildConfigField 'boolean', 'SANDBOX', 'true'
+        }
+    }
+}
+
+dependencies {
+    implementation "io.insert-koin:koin-android:$koinVersion"
+
+    implementation "io.reactivex.rxjava3:rxjava:$rxJavaVersion"
+
+    implementation project(":core")
+    implementation project(':google-api')
+    implementation project(":tools-api")
+    implementation project(":toggler-api")
+}
